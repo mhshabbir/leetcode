@@ -15,7 +15,7 @@ class Solution:
         #     win[character] = 0
 
         # while right < len(s) and left < len(s):
-        #     if s[right] NOT in T.values():
+        #     if s[right] not in T:
         #         right += 1
         #     elif win[s[right]] == T[s[right]]:
         #         have += 1
@@ -25,11 +25,21 @@ class Solution:
         #     elif win[s[right]] < T[s[right]]:
         #         win[s[right]] += 1
         #         have += 1
+                
+            
+        #     print("test")
             
         #     while have == need:
-        #         if s[left] 
-        #         res = s[left:right]
-        #         lenRes = len(res) 
+        #         if (right - left + 1) > lenRes:
+        #             res = s[left:right + 1]
+        #             lenRes = len(res)
+                
+        #         if s[left] in win:
+        #             win[s[left]] -= 1
+        #         if s[left] in T and win[s[left]] < T[s[left]]:
+        #             have -= 1
+        #         left += 1
+        # return res
 
         if t == "":
             return ""
