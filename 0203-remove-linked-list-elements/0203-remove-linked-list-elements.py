@@ -5,24 +5,32 @@
 #         self.next = next
 class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
-        # node = ListNode
-        # node = head
-        # while node:
-        #     if node.next.val == val and node.next.next:
-        #         node.next = node.next.next
-        #     elif node.next.val == val:
-        #         node.next = None
-        #     node = node.next
-        # return head
-        sentinel = ListNode(0)
-        sentinel.next = head
-        
-        prev, curr = sentinel, head
-        while curr:
-            if curr.val == val:
-                prev.next = curr.next
+        """
+        U:
+        remove the val = 6 from the linkedList
+        M
+        using a temp node and 2 pointers
+        P
+        D -> 1 -> 2 -> 3 -> 4 -> 5 -> N
+                                 p    c    t
+        D -> 1 -> 2 -> 3 -> 4 -> 5 -> N
+                            p    c
+
+        I
+        R
+        E
+        """
+        dummy = ListNode(0, head)
+        prev = dummy
+        cur = head
+
+        while cur:
+            if cur.val == val:
+                prev.next = cur.next
+                cur = cur.next
+
             else:
-                prev = curr
-            curr = curr.next
+                cur = cur.next
+                prev = prev.next
         
-        return sentinel.next
+        return dummy.next
