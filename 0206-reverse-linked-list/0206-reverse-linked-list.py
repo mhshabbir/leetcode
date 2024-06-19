@@ -6,30 +6,28 @@
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """
-        U:
-        Reverse the list and return the head
+        U: 
+        Sorted List
+        Is there any empty node
+        what happens if there is only 1 element
+
+
         M:
-        linked list using 2 pointers
+        Two Pointers
+
         P:
-        use cur and prev pointers 
-        place prev's pointer and change its next to behind pointer
-
-                     V
-        Temp -> 1 <- 2 -> 3 -> N
-                ^
-        I
-        R
-        E:
-
+         P    C   T
+         N <-  1  2 <- 3 <- 4 <- 5 -> N
+          p -> N
         """
+
         prev = None
         cur = head
 
         while cur:
             temp = cur.next
             cur.next = prev
-
             prev = cur
             cur = temp
-
+        
         return prev
