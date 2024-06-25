@@ -31,22 +31,56 @@ class Solution:
         
         """
         # Stack solution:
-        stack = []
+        # stack = []
 
+        # cur = head
+        # while cur:
+        #     while stack and cur.val > stack[-1]:
+        #         stack.pop()
+        #     stack.append(cur.val)
+        #     cur = cur.next
+
+        # dummy = ListNode()
+        # cur = dummy
+
+        # for n in stack:
+        #     cur.next = ListNode(n)
+        #     cur = cur.next
+        # return dummy.next
+        # "Reverse the linked List and maintain a max"
+        """ 
+             t
+       <- 1  2 -> 3 -> 4 -> 5
+  prev    Cur
+
+        """
+
+        def reverse(head):
+            prev = None
+            cur = head
+
+            while cur:
+                temp = cur.next
+                cur.next = prev
+                prev = cur
+                cur = temp
+            return prev
+
+        head = reverse(head)
         cur = head
-        while cur:
-            while stack and cur.val > stack[-1]:
-                stack.pop()
-            stack.append(cur.val)
-            cur = cur.next
+        curMax = cur.val
+        while cur.next:
+            if cur.next.val < curMax:
+                cur.next = cur.next.next
+            else:
+                curMax = cur.next.val
+                cur = cur.next
 
-        dummy = ListNode()
-        cur = dummy
+        return reverse(head)
 
-        for n in stack:
-            cur.next = ListNode(n)
-            cur = cur.next
-        return dummy.next
+
+
+
 
             
 
