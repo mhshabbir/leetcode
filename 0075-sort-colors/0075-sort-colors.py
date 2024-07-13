@@ -74,25 +74,25 @@ class Solution:
         r = len(nums) - 1
 
         while r > l and v <= r:
-            print(nums[l], nums[v], nums[r], nums)
+            
             if nums[v] == 0:
                 temp = nums[l]
                 nums[l] = nums[v]
                 nums[v] = temp
                 l += 1
                 v += 1
-                print("if",nums)
+                
             elif nums[v] == 2:
                 temp = nums[r]
                 nums[r] = nums[v]
                 nums[v] = temp
                 r -=1
-                print("else",nums)
+                
             else:
                 v += 1
-                print("else3",nums)
+                
             
-            print(nums[l], nums[v], nums[r], nums)
+            
 
 
         
