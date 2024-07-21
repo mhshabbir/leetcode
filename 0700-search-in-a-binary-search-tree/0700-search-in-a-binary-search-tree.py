@@ -20,19 +20,27 @@ class Solution:
         #         queue.append(current.right)
             
         # return None
+        # if not root:
+        #     return None
+        
+        # stack = [root]
+        # while stack:
+        #     current = stack.pop()
+        #     if current.val == val:
+        #         return current
+            
+        #     if current.left:
+        #         stack.append(current.left)
+        #     if current.right:
+        #         stack.append(current.right)
+            
+        # return None
+        # Recursion
         if not root:
             return None
-        
-        stack = [root]
-        while stack:
-            current = stack.pop()
-            if current.val == val:
-                return current
-            
-            if current.left:
-                stack.append(current.left)
-            if current.right:
-                stack.append(current.right)
-            
-        return None
+
+        if root.val == val:
+            return root
+
+        return self.searchBST(root.left, val) or self.searchBST(root.right, val)
 
