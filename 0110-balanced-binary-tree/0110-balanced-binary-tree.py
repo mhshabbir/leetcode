@@ -5,28 +5,19 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isBalanced(self, root):
-        return self._isBalanced(root)
-
-    def _isBalanced(self, root) -> bool:
-        if not root:
-            return True
-        
-        heightLeft = self.height(root.left)
-        heightRight = self.height(root.right)
-        
-        if abs(heightLeft - heightRight) > 1:
-            return False
-
-        return self._isBalanced(root.left) and self._isBalanced(root.right)
-        #                 # 0        -       2
-        # return False if abs(heightLeft - heightRight) > 1 else True
-        
-    def height(self, root):
-        if not root:
-            return -1
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        """
+        The right side and the left side is balance and never unbalace by more than one
+        """
+        def dsf(root):
+            if not root:
+                return [True, 0]
             
-        left = 1 + self.height(root.left)
-        right = 1 + self.height(root.right)
-        
-        return max(left, right)
+            left = dsf(root.left)
+            right = dsf(root.right)
+
+            balanced = (left[0] and right[0] and abs(left[1] - right[1]) <= 1)
+
+            return [balanced, 1 + max(left[1], right[1])]
+
+        return dsf(root)[0]
