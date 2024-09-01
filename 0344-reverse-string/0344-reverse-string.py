@@ -7,11 +7,8 @@ class Solution:
         l = 0 
         r = len(s)-1
         while l < r:
-            temp = s[l]
-            print(temp)
             s[l] = s[r]
-            print(s[l], s[r])
-            s[r] = temp
+            s[r] = s[l]
             l += 1
             r -= 1
         
