@@ -7,14 +7,32 @@
 
 class Solution:
     def guessNumber(self, n: int) -> int:
-        top = n
-        bottom = 1
-        while True:
-            myGuess = random.randint(bottom, top)
-            guessNum = guess(myGuess)
-            if guessNum == 0:
-                return myGuess
-            elif guessNum == -1: #means that its higher
-                top = myGuess - 1
+        """
+            input is n
+            if num > pick:
+                return -1
+            elif num < pick:
+                return 1
             else:
-                bottom = myGuess + 1
+                return num
+            
+            l = 1
+            r = n (10)
+            num   
+        """
+        l = 1
+        r = n
+
+        while l <= r:
+            num = (l + r) //2
+            result = guess(num)
+            if result == -1:
+                r = num - 1
+            elif result == 1:
+                l = num + 1
+            else:
+                return num
+
+
+
+
