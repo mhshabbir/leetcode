@@ -9,7 +9,8 @@ class Solution:
         for i in range(1, n+1):
             if i <= num:
                 num -= i
-
+                if i == n:
+                    return i
             else:
                 return i - 1
         
