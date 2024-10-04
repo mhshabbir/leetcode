@@ -31,7 +31,7 @@ class Solution:
             if isPeak(mid):
                 return mid
             # look left
-            elif mid-1 > 0 and nums[mid] < nums[mid-1]:
+            elif mid-1 >= 0 and nums[mid] < nums[mid-1]:
                 right = mid - 1
             else:
                 left = mid + 1
