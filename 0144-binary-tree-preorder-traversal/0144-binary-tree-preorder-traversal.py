@@ -9,15 +9,16 @@ class Solution:
         # if not root:
         #     return []
         # return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
-        cur = root
-        stack = []
-        res = []
 
-        while stack or cur:
-            if cur:
+        res = []
+        stack = []
+        cur = root
+
+        while cur or stack:
+            while cur:
+                stack.append(cur)
                 res.append(cur.val)
-                stack.append(cur.right)
                 cur = cur.left
-            else:
-                cur = stack.pop()
+            cur = stack.pop()
+            cur = cur.right
         return res
