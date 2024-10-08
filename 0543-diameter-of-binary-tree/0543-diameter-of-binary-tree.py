@@ -7,23 +7,30 @@
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         """
-        keep a max left and max right and return to your parent + 1
-        
+
+                7  3
+                /    \    
+                4 2    9  1
+            / \
+        1  3     5  1
+            / \
+        n   n 
+
+             4 2  
+            / \
+        1  3     5  1
+          / \   
+         n   n 
         """
-        res = 0
-
-        def maxdsf(root):
-            if not root:
+        self.maxDiameter = 0
+        
+        def dfs(curr):
+            if not curr:
                 return 0
-            
-            left = maxdsf(root.left)
-            right = maxdsf(root.right)
+            left = dfs(curr.left)
+            right = dfs(curr.right)
 
-            nonlocal res
-            res = max(res, left + right)
-
+            self.maxDiameter = max(self.maxDiameter, left + right)
             return 1 + max(left, right)
-
-        maxdsf(root)
-        return res
-            
+        dfs(root)
+        return self.maxDiameter
