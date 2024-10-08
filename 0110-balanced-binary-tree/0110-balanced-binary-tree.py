@@ -7,17 +7,40 @@
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
         """
-        The right side and the left side is balance and never unbalace by more than one
+            3
+           / \
+           n  n
+    
+             1 
+            / \
+           4 2
+          / \
+        1 3   4 1
+          /\  /\
+
         """
-        def dsf(root):
-            if not root:
-                return [True, 0]
-            
-            left = dsf(root.left)
-            right = dsf(root.right)
+        # if not root:
+        #     return 0
+        
+        # left = self.isBalanced(root.left)
+        # right = self.isBalanced(root.right)
 
-            balanced = (left[0] and right[0] and abs(left[1] - right[1]) <= 1)
+        
+        # if abs(left - right) > 1:
+        #     return False
+        # else:
+        #     return 
+        self.balanceNode = True
+        def dfs(curr):
+            if not curr:
+                return 0
+            left = dfs(curr.left)
+            right = dfs(curr.right)
 
-            return [balanced, 1 + max(left[1], right[1])]
+            if abs(left - right) > 1:
+                self.balanceNode = False
+            return 1 + max(left,right)
+        dfs(root)
+        return self.balanceNode
 
-        return dsf(root)[0]
+
