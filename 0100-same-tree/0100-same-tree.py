@@ -20,6 +20,6 @@ class Solution:
             return False
         
         left = self.isSameTree(p.left, q.left)
-        right = self.isSameTree(p.left, q.left)
+        right = self.isSameTree(p.right, q.right)
 
         return p.val == q.val and (left == right == True)
