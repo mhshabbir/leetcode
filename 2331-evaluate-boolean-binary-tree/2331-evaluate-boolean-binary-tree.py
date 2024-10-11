@@ -16,7 +16,9 @@ class Solution:
         left = self.evaluateTree(root.left) #True
         right = self.evaluateTree(root.right) #False
 
-        if root.val == 2:
-            return left or right
-        else:
-            return left and right
+        # if root.val == 2:
+        #     return left or right
+        # else:
+        #     return left and right
+
+        return (left or right) if root.val == 2 else (left and right)
