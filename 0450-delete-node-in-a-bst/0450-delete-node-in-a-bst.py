@@ -10,9 +10,9 @@ class Solution:
             return root
 
         if key > root.val:
-            right = self.deleteNode(root.right, key)
+            root.right = self.deleteNode(root.right, key)
         elif key < root.val:
-            left = self.deleteNode(root.left, key)
+            root.left = self.deleteNode(root.left, key)
         else:
             if not root.left:
                 return root.right
