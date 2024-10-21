@@ -1,10 +1,10 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-
         hashset = {}
-        for n,i in enumerate(nums):
-            if (target - i) in hashset:
-                return [hashset[target-i], n]
+        for index,num in enumerate(nums):
+            # 9 - 2 = 7
+            if (target - num) in hashset:
+                return [index, hashset[(target - num)]]
             else:
-                hashset[i] = n
+                hashset[num] = index
         
