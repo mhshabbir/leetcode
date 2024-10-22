@@ -48,9 +48,10 @@ class Solution:
             courseMap[course] = []
             return True
             
-        for course in courseMap.keys():
+        for course in range(numCourses):
             if not dfs(course): return False
         return True
+        
         
 
 
