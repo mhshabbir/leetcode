@@ -16,12 +16,17 @@ class Solution:
                 m -= 1
                 cur -= 1
 
-        if n > -1:
-            for i in range(n, -1, -1):
-                nums1[cur] = nums2[i]
-                cur -= 1
-        if m > -1:
-            for i in range(m,-1, -1):
-                nums1[cur] = nums1[i]
-                cur -= 1
+        # if n > -1:
+        #     for i in range(n, -1, -1):
+        #         nums1[cur] = nums2[i]
+        #         cur -= 1
+        # if m > -1:
+        #     for i in range(m,-1, -1):
+        #         nums1[cur] = nums1[i]
+        #         cur -= 1
+
+        while n > -1:
+            nums1[cur] = nums2[n]
+            n -= 1
+            cur -= 1
         return nums1
