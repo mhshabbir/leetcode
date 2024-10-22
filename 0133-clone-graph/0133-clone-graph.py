@@ -7,20 +7,19 @@ class Node:
 """
 
 from typing import Optional
-from collections import deque
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        hashmap = {}
-        def clone(node):
-            if node in hashmap:
-                return hashmap[node]
-            copy = Node(node.val)
-            hashmap[node] = copy
+        oldToNew = {}
 
-            for nei in node.neighbors:
-                copy.neighbors.append(clone(nei))
+        def clone(node):
+            if node in oldToNew:
+                return oldToNew[node]
+        
+            copy = Node(node.val)
+            oldToNew[node] = copy
+
+            for neighbor in node.neighbors:
+                copy.neighbors.append(clone(neighbor))
             
             return copy
-
         return clone(node) if node else None
-
