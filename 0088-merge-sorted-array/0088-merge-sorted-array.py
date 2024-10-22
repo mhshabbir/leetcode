@@ -1,22 +1,27 @@
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
-
-        ptr1, last = m - 1,  len(nums1) - 1
-        ptr3 = len(nums2) - 1
-
-        while ptr1 > -1 and ptr3 > -1:
-            print(nums1, ptr1, ptr3, last)
-            if nums2[ptr3] > nums1[ptr1]:
-                nums1[last] = nums2[ptr3]
-                ptr3 -= 1
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        cur = len(nums1) - 1
+        n -= 1
+        m -= 1
+        while n > -1 and m > -1:
+            if nums2[n] > nums1[m]:
+                nums1[cur] = nums2[n]
+                n -= 1
+                cur -= 1
             else:
-                nums1[last] = nums1[ptr1]
-                ptr1 -= 1
-            last -= 1
-        print("after",nums1, ptr1, ptr3, last)
-        while ptr3 > -1:
-            print("after",nums1, ptr1, ptr3, last)
-            nums1[last] = nums2[ptr3]
-            ptr3 -= 1
-            last -= 1
-    
+                nums1[cur] = nums1[m]
+                m -= 1
+                cur -= 1
+
+        if n > -1:
+            for i in range(n, -1, -1):
+                nums1[cur] = nums2[i]
+                cur -= 1
+        if m > -1:
+            for i in range(m,-1, -1):
+                nums1[cur] = nums1[i]
+                cur -= 1
+        return nums1
