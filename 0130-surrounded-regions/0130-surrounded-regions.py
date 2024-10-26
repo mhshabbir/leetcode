@@ -7,7 +7,7 @@ class Solution:
         ROWS, COLS = len(board), len(board[0])
 
         def dfs(r,c):
-            if (c < 0 or r < 0 or c == COLS or r == ROWS or board[r][c] != "O"):
+            if (c < 0 or r < 0 or c == COLS or r == ROWS or board[r][c] != "O" or (r,c) in visited):
                 return 
             
             visited.add((r,c))
