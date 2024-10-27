@@ -12,17 +12,16 @@ class Solution:
            2  2           N 2
         """
         def compareTree(root1, root2):
-            if (not root1 and root2) or (root1 and not root2):
-                return False
-            if root1 and root2 and root1.val != root2.val:
-                return False
-            if (not root1 and not root2) or (root1.left == root1.right == None and root2.left == root2.right == None):
+            if not root1 and not root2:
                 return True
+
+            if not root1 or not root2:
+                return False
             
-            return (compareTree(root1.left, root2.right) and 
+            return (root1.val == root2.val and compareTree(root1.left, root2.right) and 
             compareTree(root1.right, root2.left))
 
-        return compareTree(root, root)
+        return compareTree(root.left, root.right)
 
 
             
