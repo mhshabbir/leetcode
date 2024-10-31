@@ -21,9 +21,7 @@ class Solution:
         #     result.append(course)
         #     return True
 
-        # for course in range(numCourses):
-        #     if not dfs(course): return []
-        # return result
+        
         prereq = {c: [] for c in range(numCourses)}
         for crs, pre in prerequisites:
             prereq[crs].append(pre)
@@ -46,9 +44,8 @@ class Solution:
             output.append(crs)
             return True
 
-        for c in range(numCourses):
-            if dfs(c) == False:
-                return []
+        for course in range(numCourses):
+            if not dfs(course): return []
         return output
 
         
