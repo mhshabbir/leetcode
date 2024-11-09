@@ -1,28 +1,30 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        # a graph is a tree if it has no cycles
-        # so basically traverse and look for cycles
-        if not edges and n < 2:
-            return True
+        graph = defaultdict(list)
 
-        adjList = {}
-        for a, b in edges:
-            adjList[a] = adjList.get(a, []) + [b]
-            adjList[b] = adjList.get(b, []) + [a]
-        def dfs(vertex, parent, visited):
-            if vertex in visited:
+        for node in edges:
+            graph[node[0]].append(node[1])
+            graph[node[1]].append(node[0])
+
+        visited = set()
+
+        def checkCycle(node, prev):
+            print("working")
+            if node in visited:
                 return False
             
-            visited.add(vertex)
-            if not adjList.get(vertex):
-                return False
+            visited.add(node)
 
-            for nei in adjList[vertex]:
-                if nei == parent:
+            for nei in graph[node]:
+                if nei == prev:
                     continue
-                if not dfs(nei, vertex, visited):
+                if not checkCycle(nei, node):
+                    print(nei)
                     return False
+                
+            print((visited))
             return True
-        visited = set()
-        res = dfs(0, None, visited)
-        return res and len(list(visited)) == n
+
+        
+
+        return checkCycle(0, -1) and len(visited) == n
