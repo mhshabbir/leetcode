@@ -1,37 +1,28 @@
+from typing import List
+from collections import defaultdict
+
 class Solution:
-    def invalidTransactions(self, transactions: List[str]) -> List[str]:
+    def invalidTransactions(self, trans: List[str]) -> List[str]:
+        hmap = {}
+        invalid_indices = set()
+        
+        for i, t in enumerate(trans):
+            name, time, amount, city = t.split(',')
+            if name not in hmap:
+                hmap[name] = []
+            hmap[name].append((i, int(time), int(amount), city))
+        print(hmap)
 
-        validTransaction = defaultdict(list)
-        invalid = []
-        for transaction in transactions:
-            user, time, amount, city = transaction.split(",")
-            time = int(time)
-            amount = int(amount)
-            if amount > 1000:
-                invalid.append(transaction)
-            elif user in validTransaction:
-                # 50 - 20 = 30
-                if time - validTransaction[user][0][-1] <= 60 and validTransaction[user][1][-1] != city:
-                    invalid.append(transaction)
-                    while (validTransaction[user][0] and time - validTransaction[user][0][-1] <= 60 and validTransaction[user][1][-1] != city):                        
-                        invalid.append(validTransaction[user][2].pop())
-                        validTransaction[user][0].pop()
-                        validTransaction[user][1].pop()
-                        
-                else:
-                    validTransaction[user][0].append(time)
-                    validTransaction[user][1].append(city)
-                    validTransaction[user][2].append(transaction)
-
-            else:
-                validTransaction[user].append([])
-                validTransaction[user].append([])
-                validTransaction[user].append([])
-                validTransaction[user][0].append(time)
-                validTransaction[user][1].append(city)
-                validTransaction[user][2].append(transaction)
-
-        return sorted(invalid, key=lambda x: int(x.split(",")[1]))
+        
+        for name, transactions in hmap.items():
+            for i, (idx1, time1, amount1, city1) in enumerate(transactions):
+                print(idx1)
+                if amount1 > 1000:
+                    invalid_indices.add(idx1)
+                    
+                for j, (idx2, time2, amount2, city2) in enumerate(transactions):
+                    if i != j and abs(time1 - time2) <= 60 and city1 != city2:
+                        invalid_indices.add(idx1)
+                        invalid_indices.add(idx2)
             
-
-
+        return [trans[i] for i in invalid_indices]
