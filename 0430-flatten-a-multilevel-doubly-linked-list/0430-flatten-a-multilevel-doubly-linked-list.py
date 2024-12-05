@@ -10,26 +10,21 @@ class Node:
 
 class Solution:
     def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        curr = head
+        cur = head
 
-        while curr:
-            if curr.child:
-                temp_next_of_parent = curr.next
-                
-                # make the child next to curr
-                curr.next = curr.child
-                curr.child.prev = curr
-                curr.child = None
-                
-                temp_curr = curr.next
-                while temp_curr.next:
-                    temp_curr = temp_curr.next
-                temp_curr.next = temp_next_of_parent
-                temp_next_of_parent.prev = temp_curr
+        while cur:
+            if cur.child:
+                tmp = cur.next
+                cur.next = cur.child
+                curChild = cur.child
+                curChild.prev = cur
+                cur.child = None
+                while curChild.next:
+                    curChild = curChild.next
+                curChild.next = tmp
+                if tmp:
+                    tmp.prev = curChild
 
-                curr = curr.next
-
-            else:
-                curr = curr.next
-            
+            cur = cur.next
         return head
+
