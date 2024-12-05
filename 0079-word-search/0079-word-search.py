@@ -1,31 +1,31 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        ROWS, COLS = len(board), len(board[0])
-
-        wordlist = list(word)
+        
         visited = set()
-        def dfs(r,c,i,substring):
-            if (r < 0 or c < 0 or r == ROWS or c == COLS or (r,c) in visited or board[r][c] != wordlist[i]):
-                return False
-            visited.add((r,c))
-            substring.append(board[r][c])
 
-            if substring == wordlist:
+        def dfs(row, col, i):
+            if i == len(word):
                 return True
-            
-            res = (dfs(r+1,c,i+1, substring) or
-            dfs(r-1,c,i+1, substring) or
-            dfs(r,c+1,i+1, substring) or
-            dfs(r,c-1,i+1, substring))
-            visited.remove((r,c))
+
+            if (row < 0 or row == len(board) or col < 0 or col == len(board[0]) or
+                (row, col) in visited or word[i] != board[row][col]):
+                return
+
+            visited.add((row, col)) 
+
+            res = (dfs(row + 1, col, i + 1) or
+                   dfs(row - 1, col, i + 1) or
+                   dfs(row, col + 1, i + 1) or
+                   dfs(row, col - 1, i + 1))
+
+            visited.remove((row, col))
 
             return res
 
-        for r in range(ROWS):
-            for c in range(COLS):
-                if board[r][c] == wordlist[0]:
-                    if dfs(r,c,0,[]):
-                        return True
-                    
-        return False
 
+        for row in range(len(board)):
+            for col in range(len(board[0])):
+                if dfs(row, col, 0):
+                    return True
+
+        return False
