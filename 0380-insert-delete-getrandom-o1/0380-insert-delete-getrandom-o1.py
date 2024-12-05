@@ -1,29 +1,35 @@
 class RandomizedSet:
 
     def __init__(self):
-        self.dict = {}
-        self.valArray = []
+        self.hashmap = {}
+        self.keyArr = []
 
     def insert(self, val: int) -> bool:
-        if val in self.dict:
+        if val in self.hashmap:
             return False
-        self.dict[val] = len(self.valArray)
-        self.valArray.append(val)
-        return True
+        else:
+            self.keyArr.append(val)
+            self.hashmap[val] = len(self.keyArr) - 1
+            return True
 
     def remove(self, val: int) -> bool:
-        if val not in self.dict:
-            return False
-        index = self.dict[val]
-        temp = self.valArray[-1]
-        self.valArray[-1] = self.valArray[index]
-        self.valArray[index] = temp
-        self.dict[temp] = index
-        del self.dict[val]
-        return self.valArray.pop(len(self.valArray)-1)
+        if val in self.hashmap:
+            # find the index for the array
+            arrayKey = self.hashmap[val]
+            # replace the index with the last element of the array
+            self.keyArr[arrayKey] = self.keyArr[-1]
+            # update the keyindex with the hashmap
+            self.hashmap[self.keyArr[arrayKey]] = arrayKey
+            # delete the last index
+            self.keyArr.pop()
+            # delete the hashmap for the value
+            del self.hashmap[val]
+            return True
+        return False
 
     def getRandom(self) -> int:
-        return random.choice(self.valArray)
+        return self.keyArr[random.randint(0, len(self.keyArr)-1)]
+        
 
 
 # Your RandomizedSet object will be instantiated and called as such:
