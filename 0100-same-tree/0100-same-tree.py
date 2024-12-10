@@ -16,10 +16,11 @@ class Solution:
 
         if not p and not q:
             return True
-        elif p and not q or not p and q:
+        
+        if not p and q or p and not q:
             return False
         
-        left = self.isSameTree(p.left, q.left)
-        right = self.isSameTree(p.right, q.right)
-
-        return p.val == q.val and (left == right == True)
+        if p.val != q.val:
+            return False
+        
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
