@@ -7,24 +7,26 @@ class Solution:
             3 -> []
         """
         courseMap = defaultdict(list)
-        pathway = set()
-
+        # for pre, crs in prerequisites:
+        #     courseMap[crs].append(pre)
         for preReq in prerequisites:
             courseMap[preReq[1]].append(preReq[0])
-
+        cycle = set()
         def dfs(course):
-            if course in pathway:
+            if course in cycle:
                 return False
             if courseMap[course] == []:
                 return True
-            pathway.add(course)
-            for prereqs in courseMap[course]:
-                if not dfs(prereqs):
+            
+            cycle.add(course)
+            for prereq in courseMap[course]:
+                if not dfs(prereq):
                     return False
             courseMap[course] = []
-            pathway.remove(course)
+            cycle.remove(course)
             return True
-
+        
         for course in range(numCourses):
-            if not dfs(course): return False
-        return True 
+            if not dfs(course):
+                return False
+        return True
