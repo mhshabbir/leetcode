@@ -19,11 +19,14 @@ class Solution:
         # return res
 
         count = Counter(nums)
-        top_k = list(count.values())
+        top_k = []
+
+        for num, freq in count.items():
+            top_k.append((-freq, num))
         
         result = []
         heapq.heapify(top_k)
         for i in range(k):
-            result.append(heapq.heappop(top_k))
+            result.append(heapq.heappop(top_k)[1])
         return result
 
