@@ -6,32 +6,36 @@
 import time
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
-        """
-        step 1: add the head of all the list into minheap
+        if not lists or len(lists) == 0:
+            return None
+        
+        while len(lists) > 1:
+            mergeLists = []
+            for i in range(0, len(lists), 2):
+                l1 = lists[i]
+                l2 = lists[i + 1] if (i + 1) < len(lists) else None
+                mergeLists.append(self.mergeList(l1, l2))
+            lists = mergeLists
+        return lists[0]
 
-
-        step 2: pop the minheap to remove the min element and add the next eleent of the list back into min heap
-
-        if its None or end of the list dont add it in the list
-
-        """
-
+    def mergeList(self, l1, l2):
         dummy = ListNode()
         cur = dummy
-        minHeap = []
-        for head in lists:
-            if head:
-                minHeap.append((head.val, time.time(), head.next))
 
-        heapq.heapify(minHeap)
-
-        while minHeap:
-            value, seq, nxt = heapq.heappop(minHeap)
-
-            cur.next = ListNode(value)
+        while l1 and l2:
+            if l1.val < l2.val:
+                cur.next = ListNode(l1.val)
+                l1 = l1.next
+            else:
+                cur.next = ListNode(l2.val)
+                l2 = l2.next
             cur = cur.next
-            if nxt != None:
-                heapq.heappush(minHeap, (nxt.val, time.time(), nxt.next))
+
+        if l1:
+            cur.next = l1
+        elif l2:
+            cur.next = l2
         
         return dummy.next
+                
         
