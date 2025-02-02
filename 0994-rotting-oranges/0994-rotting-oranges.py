@@ -4,7 +4,6 @@ class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         row, col = len(grid), len(grid[0])
         queue = deque()
-        queue.append()
         fresh = 0
         for r in range(row):
             for c in range(col):
